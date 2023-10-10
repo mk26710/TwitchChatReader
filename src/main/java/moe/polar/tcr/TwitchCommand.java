@@ -9,8 +9,6 @@ import org.jetbrains.annotations.Nullable;
 import static moe.polar.tcr.Utils.getChat;
 
 public class TwitchCommand {
-
-
     @Nullable
     public static BetterTwirk twirk = null;
 
