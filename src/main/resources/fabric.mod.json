@@ -3,7 +3,7 @@
 	"id": "twitchchatreader",
 	"version": "${version}",
 	"name": "TwitchChatReader",
-	"description": "This mod allows you to connect to Twitch channels and read their chat right in your game",
+	"description": "This mod allows you to connect to Twitch channels and read their chat in the game!\n\nYou should use /twitch command, it's pretty straightforward :)",
 	"authors": [
 		"httpolar"
 	],
