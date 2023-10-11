@@ -4,38 +4,35 @@ import com.mojang.brigadier.context.CommandContext;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import org.jetbrains.annotations.Nullable;
 
 import static moe.polar.tcr.Utils.getChat;
+import static moe.polar.tcr.TwitchChatReader.TWIRK;
 
 public class TwitchCommand {
-    @Nullable
-    public static BetterTwirk twirk = null;
-
     public static int connect(CommandContext<FabricClientCommandSource> ctx) {
-        if (twirk != null) {
-            if (twirk.isConnected()) {
-                twirk.disconnect();
+        if (TWIRK != null) {
+            if (TWIRK.isConnected()) {
+                TWIRK.disconnect();
             }
-            twirk = null;
+            TWIRK = null;
         }
 
         final var channel = ctx.getArgument("channel", String.class);
 
-        twirk = new BetterTwirk(channel);
-        twirk.addListener(new TwirkToMinecraftChatListener(twirk));
+        TWIRK = new BetterTwirk(channel);
+        TWIRK.addListener(new TwirkToMinecraftChatListener(TWIRK));
 
         final var msg = Text
-                .literal("Connecting to https://twitch.tv/" + twirk.channel + "...")
+                .literal("Connecting to https://twitch.tv/" + TWIRK.channel + "...")
                 .styled(s -> s.withColor(Formatting.GRAY));
 
         getChat().addMessage(msg);
 
-        twirk.connect().exceptionally((e) -> {
+        TWIRK.connect().exceptionally((e) -> {
             final var errorMessage = Text
                     .literal("ERROR: ")
                     .append(e.getMessage())
-                    .styled(s -> s.withColor(Formatting.RED));
+                    .styled(s -> s.withColor(0xFF0000));
 
             getChat().addMessage(errorMessage);
 
@@ -47,8 +44,8 @@ public class TwitchCommand {
     }
 
     public static int disconnect(CommandContext<FabricClientCommandSource> ctx) {
-        if (twirk != null && twirk.isConnected())
-            twirk.disconnect();
+        if (TWIRK != null && TWIRK.isConnected())
+            TWIRK.disconnect();
 
         return 0;
     }

@@ -3,17 +3,17 @@ package moe.polar.tcr;
 import com.gikk.twirk.events.TwirkListener;
 import com.gikk.twirk.types.twitchMessage.TwitchMessage;
 import com.gikk.twirk.types.users.TwitchUser;
-import lombok.NonNull;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import org.jetbrains.annotations.NotNull;
 
 import static moe.polar.tcr.Utils.getChat;
 
 public class TwirkToMinecraftChatListener implements TwirkListener {
-    @NonNull
+    @NotNull
     private final BetterTwirk twirk;
 
-    public TwirkToMinecraftChatListener(@NonNull BetterTwirk instance) {
+    public TwirkToMinecraftChatListener(@NotNull BetterTwirk instance) {
         twirk = instance;
     }
 

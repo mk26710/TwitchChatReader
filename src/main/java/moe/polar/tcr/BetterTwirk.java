@@ -3,7 +3,7 @@ package moe.polar.tcr;
 import com.gikk.twirk.Twirk;
 import com.gikk.twirk.TwirkBuilder;
 import com.gikk.twirk.events.TwirkListener;
-import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
@@ -12,19 +12,19 @@ import static moe.polar.tcr.Utils.randomNumIn;
 import static moe.polar.tcr.TwitchChatReader.TCR_EXECUTOR;
 
 public class BetterTwirk {
-    @NonNull
+    @NotNull
     public final String nick = getAnonymousTwitchUsername();
 
-    @NonNull
+    @NotNull
     public final String password = "VeryCoolPassword";
 
-    @NonNull
+    @NotNull
     private final Twirk underlyingTwirk;
 
-    @NonNull
+    @NotNull
     public final String channel;
 
-    public BetterTwirk(@NonNull String channel) {
+    public BetterTwirk(@NotNull String channel) {
         this.channel = channel;
         underlyingTwirk = new TwirkBuilder(channel, nick, password).build();
     }
