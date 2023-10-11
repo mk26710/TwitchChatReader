@@ -1,5 +1,6 @@
 package moe.polar.tcr;
 
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import net.fabricmc.api.ClientModInitializer;
 
@@ -25,23 +26,25 @@ public class TwitchChatReader implements ClientModInitializer {
         final var handler = new TwitchCommandHandler();
 
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
-            final LiteralCommandNode<FabricClientCommandSource> twitchNode = ClientCommandManager
-                    .literal("twitch")
-                    .build();
-
-            final LiteralCommandNode<FabricClientCommandSource> connectNode = ClientCommandManager
-                    .literal("connect")
-                    .then(argument("channel", word()).executes(handler::connect))
-                    .build();
-
-            final LiteralCommandNode<FabricClientCommandSource> disconnectNode = ClientCommandManager
-                    .literal("disconnect")
-                    .executes(handler::disconnect)
-                    .build();
-
-            dispatcher.getRoot().addChild(twitchNode);
-            twitchNode.addChild(connectNode);
-            twitchNode.addChild(disconnectNode);
+            dispatcher.register(
+                    ClientCommandManager
+                            .literal("twitch")
+                            .then(connect(handler))
+                            .then(disconnect(handler))
+            );
         });
+    }
+
+
+    private LiteralArgumentBuilder<FabricClientCommandSource> connect(TwitchCommandHandler handler) {
+        return ClientCommandManager
+                .literal("connect")
+                .then(argument("channel", word()).executes(handler::connect));
+    }
+
+    private LiteralArgumentBuilder<FabricClientCommandSource> disconnect(TwitchCommandHandler handler) {
+        return ClientCommandManager
+                .literal("disconnect")
+                .executes(handler::disconnect);
     }
 }
