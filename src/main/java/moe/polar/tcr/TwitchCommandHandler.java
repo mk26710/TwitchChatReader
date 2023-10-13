@@ -27,16 +27,15 @@ public class TwitchCommandHandler {
         twirk.addListener(listener);
 
         final var msg = Text
-                .literal("Connecting to https://twitch.tv/" + twirk.channel + "...")
-                .styled(s -> s.withColor(Formatting.GRAY));
+                .translatable("commands.connect.process", twirk.channel)
+                .formatted(Formatting.GRAY);
 
         getChat().addMessage(msg);
 
         twirk.connect().exceptionally((e) -> {
             final var errorMessage = Text
-                    .literal("ERROR: ")
-                    .append(e.getMessage())
-                    .styled(s -> s.withColor(0xFF0000));
+                    .translatable("commands.connect.error", e.getMessage())
+                    .formatted(Formatting.RED);
 
             getChat().addMessage(errorMessage);
 
