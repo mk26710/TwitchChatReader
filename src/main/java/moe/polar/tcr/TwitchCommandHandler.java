@@ -26,17 +26,11 @@ public class TwitchCommandHandler {
         final var listener = new TwirkToMinecraftChatListener(twirk);
         twirk.addListener(listener);
 
-        final var msg = Text
-                .translatable("commands.connect.process", twirk.channel)
-                .formatted(Formatting.GRAY);
-
+        final var msg = Text.translatable("commands.connect.process", twirk.channel).formatted(Formatting.GRAY);
         getChat().addMessage(msg);
 
         twirk.connect().exceptionally((e) -> {
-            final var errorMessage = Text
-                    .translatable("commands.connect.error", e.getMessage())
-                    .formatted(Formatting.RED);
-
+            final var errorMessage = Text.translatable("commands.connect.error", e.getMessage()).formatted(Formatting.RED);
             getChat().addMessage(errorMessage);
 
             return false;

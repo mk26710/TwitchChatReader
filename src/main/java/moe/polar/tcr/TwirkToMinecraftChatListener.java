@@ -10,8 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import static moe.polar.tcr.Utils.getChat;
 
 public class TwirkToMinecraftChatListener implements TwirkListener {
-    @NotNull
-    private final BetterTwirk twirk;
+    private final @NotNull BetterTwirk twirk;
 
     public TwirkToMinecraftChatListener(@NotNull BetterTwirk instance) {
         twirk = instance;

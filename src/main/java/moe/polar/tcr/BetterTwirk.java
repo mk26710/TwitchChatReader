@@ -12,17 +12,12 @@ import static moe.polar.tcr.Utils.randomNumIn;
 import static moe.polar.tcr.TwitchChatReader.TCR_EXECUTOR;
 
 public class BetterTwirk {
-    @NotNull
-    public final String nick = getAnonymousTwitchUsername();
+    private final @NotNull Twirk underlyingTwirk;
 
-    @NotNull
-    public final String password = "VeryCoolPassword";
+    public final @NotNull String nick = getAnonymousTwitchUsername();
+    public final @NotNull String password = "VeryCoolPassword";
 
-    @NotNull
-    private final Twirk underlyingTwirk;
-
-    @NotNull
-    public final String channel;
+    public final @NotNull String channel;
 
     public BetterTwirk(@NotNull String channel) {
         this.channel = channel;
