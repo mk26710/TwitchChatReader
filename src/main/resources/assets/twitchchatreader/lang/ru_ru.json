@@ -1,0 +1,7 @@
+{
+  "commands.connect.process": "Подключение к чату %s...",
+  "commands.connect.success": "Добро пожаловать в чат %s!",
+  "commands.connect.error": "Ошибка: %s",
+  "commands.disconnect.success": "Вы покинули чат %s.",
+  "events.reconnect": "Подключение к чату %s восстановлено."
+}
