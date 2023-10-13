@@ -24,14 +24,12 @@ public class TwitchChatReader implements ClientModInitializer {
     public void onInitializeClient() {
         final var handler = new TwitchCommandHandler();
 
-        ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
-            dispatcher.register(
-                    ClientCommandManager
-                            .literal("twitch")
-                            .then(connect(handler))
-                            .then(disconnect(handler))
-            );
-        });
+        ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> dispatcher.register(
+                ClientCommandManager
+                        .literal("twitch")
+                        .then(connect(handler))
+                        .then(disconnect(handler))
+        ));
     }
 
 
