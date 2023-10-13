@@ -7,6 +7,9 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import static moe.polar.tcr.Utils.getChat;
 
 public class TwirkToMinecraftChatListener implements TwirkListener {
@@ -19,6 +22,24 @@ public class TwirkToMinecraftChatListener implements TwirkListener {
     @Override
     public void onPrivMsg(TwitchUser sender, TwitchMessage message) {
         final var content = Text.empty();
+        var hasBadges = false;
+
+        if (sender.isMod()) {
+            content.append(Text.literal("\uD83D\uDDE1").styled(s -> s.withColor(0x00ad03)));
+            hasBadges = true;
+        }
+
+        if (sender.isSub()) {
+            if (hasBadges)
+                content.append(" ");
+
+            content.append(Text.literal("⭐").styled(s -> s.withColor(0x8205b4)));
+            hasBadges = true;
+        }
+
+        if (hasBadges) {
+            content.append(" ");
+        }
 
         content.append(Text.literal(sender.getUserName()).styled(s -> s.withColor(sender.getColor())));
         content.append(": ");
