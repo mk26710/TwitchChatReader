@@ -1,0 +1,7 @@
+{
+  "commands.connect.process": "Verbinde mit dem Chatroom von %s...",
+  "commands.connect.success": "Willkommen im Chatroom von %s!",
+  "commands.connect.error": "Fehler: %s",
+  "commands.disconnect.success": "Du hast den Chatroom von %s verlassen.",
+  "events.reconnect": "Verbindung zum Chatroom von %s wiederhergestellt."
+}
