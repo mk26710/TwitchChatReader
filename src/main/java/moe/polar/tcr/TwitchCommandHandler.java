@@ -4,14 +4,14 @@ import com.mojang.brigadier.context.CommandContext;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static moe.polar.tcr.Utils.getChat;
 
 public class TwitchCommandHandler {
     private @Nullable BetterTwirk twirk = null;
 
-    public int connect(CommandContext<FabricClientCommandSource> ctx) {
+    public int connect(final @NotNull CommandContext<FabricClientCommandSource> ctx) {
         if (twirk != null) {
             if (twirk.isConnected()) {
                 twirk.disconnect();
@@ -27,11 +27,11 @@ public class TwitchCommandHandler {
         twirk.addListener(listener);
 
         final var msg = Text.translatable("commands.connect.process", twirk.channel).formatted(Formatting.GRAY);
-        getChat().addMessage(msg);
+        ctx.getSource().sendFeedback(msg);
 
         twirk.connect().exceptionally((e) -> {
             final var errorMessage = Text.translatable("commands.connect.error", e.getMessage()).formatted(Formatting.RED);
-            getChat().addMessage(errorMessage);
+            ctx.getSource().sendError(errorMessage);
 
             return false;
         });
@@ -40,7 +40,7 @@ public class TwitchCommandHandler {
         return 0;
     }
 
-    public int disconnect(CommandContext<FabricClientCommandSource> ctx) {
+    public int disconnect(final @NotNull CommandContext<FabricClientCommandSource> ctx) {
         if (twirk != null && twirk.isConnected()) {
             twirk.disconnect();
             twirk = null;
