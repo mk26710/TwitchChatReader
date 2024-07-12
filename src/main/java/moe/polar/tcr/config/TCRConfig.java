@@ -1,8 +1,8 @@
 package moe.polar.tcr.config;
 
-import com.squareup.moshi.Json;
-import com.squareup.moshi.JsonAdapter;
-import com.squareup.moshi.Moshi;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
 import net.fabricmc.loader.api.FabricLoader;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,13 +12,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class TCRConfig {
-    public @NotNull ConfigPrefixes prefixes;
+    @Expose
+    @NotNull
+    public ConfigPrefixes prefixes;
 
     private TCRConfig() {
         prefixes = new ConfigPrefixes();
     }
 
-    @Json(ignore = true)
     private static TCRConfig INSTANCE;
 
     public synchronized static TCRConfig getInstance() {
@@ -28,7 +29,6 @@ public class TCRConfig {
         return INSTANCE;
     }
 
-    @Json(ignore = true)
     private final static String fileName = "twitchchatreader.json";
 
     public Path getConfigFilePath() {
@@ -38,13 +38,13 @@ public class TCRConfig {
     public void saveToDisk() {
         final var cfgFile = getConfigFilePath();
 
-        Moshi moshi = new Moshi.Builder().build();
+        var gson = new GsonBuilder()
+                .excludeFieldsWithoutExposeAnnotation()
+                .setPrettyPrinting()
+                .serializeNulls()
+                .create();
 
-        JsonAdapter<TCRConfig> jsonAdapter = moshi
-                .adapter(TCRConfig.class)
-                .serializeNulls();
-
-        String json = jsonAdapter.indent("  ").toJson(getInstance());
+        var json = gson.toJson(INSTANCE);
 
         try {
             Files.writeString(cfgFile, json, StandardCharsets.UTF_8);
@@ -60,12 +60,11 @@ public class TCRConfig {
             return;
         }
 
-        final Moshi moshi = new Moshi.Builder().build();
-        final JsonAdapter<TCRConfig> jsonAdapter = moshi.adapter(TCRConfig.class);
+        var gson = new Gson();
 
         try {
             final String json = Files.readString(cfgFile, StandardCharsets.UTF_8);
-            final TCRConfig savedCfg = jsonAdapter.fromJson(json);
+            final TCRConfig savedCfg = gson.fromJson(json, TCRConfig.class);
 
             INSTANCE = savedCfg;
         } catch (IOException e) {

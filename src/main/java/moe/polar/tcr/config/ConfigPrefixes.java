@@ -1,13 +1,28 @@
 package moe.polar.tcr.config;
 
+import com.google.gson.annotations.Expose;
 import org.jetbrains.annotations.Nullable;
 
 public class ConfigPrefixes {
-    public @Nullable String global;
-    public @Nullable String followers;
-    public @Nullable String subscribers;
-    public @Nullable String moderators;
-    public @Nullable String vips;
+    @Expose
+    @Nullable
+    public String global;
+
+    @Expose
+    @Nullable
+    public String followers;
+
+    @Expose
+    @Nullable
+    public String subscribers;
+
+    @Expose
+    @Nullable
+    public String moderators;
+
+    @Expose
+    @Nullable
+    public String vips;
 
     public ConfigPrefixes() {
         global = null;
