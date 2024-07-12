@@ -12,7 +12,25 @@ You can find latest versions of the mod on [GitHub releases](https://github.com/
 
 To install the mod simply move the JAR file into your mods folder after installing Fabric and Fabric API.
 
-### Usage
+### How to use
 
- - To connect to someone's chat on Twitch use `/twitch connect <username>`
- - To disconnect you can use `/twitch disconnect`
+ - Run `/twitch connect <username>` replacing `<username>` with someones twitch.tv channel name in order to connect to someone's chat.
+ - Run `/twitch disconnect` to destroy the connection if there's any connection existing right now.
+ - Run `/twitch config reload` to hot-reload the configuration file (if you edit the config file you don't have to restart the game, just use this command)
+
+### Configuration
+
+Configuration file is located in `.minecraft/config/twitchchatreader.json`, and it should look like this by default
+
+
+```json
+{
+  "prefixes": {
+    "global": null,
+    "followers": null,
+    "subscribers": "&5[SUB]",
+    "moderators": "&2[MOD]",
+    "vips": "&5[VIP]"
+  }
+}
+```
