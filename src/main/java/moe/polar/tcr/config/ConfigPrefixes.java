@@ -27,8 +27,8 @@ public class ConfigPrefixes {
     public ConfigPrefixes() {
         global = null;
         followers = null;
-        subscribers = "§5[SUB]";
-        moderators = "§2[MOD]";
-        vips = "§5[VIP]";
+        subscribers = "&5[SUB]";
+        moderators = "&2[MOD]";
+        vips = "&5[VIP]";
     }
 }
