@@ -42,6 +42,7 @@ public class TCRConfig {
                 .excludeFieldsWithoutExposeAnnotation()
                 .setPrettyPrinting()
                 .serializeNulls()
+                .disableHtmlEscaping()
                 .create();
 
         var json = gson.toJson(INSTANCE);
