@@ -1,6 +1,7 @@
 package moe.polar.tcr;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import moe.polar.tcr.config.TCRConfig;
 import net.fabricmc.api.ClientModInitializer;
 
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
@@ -22,6 +23,8 @@ public class TwitchChatReader implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        TCRConfig.getInstance().readFromDisk();
+
         final var handler = new TwitchCommandHandler();
 
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> dispatcher.register(
