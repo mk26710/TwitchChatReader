@@ -25,11 +25,15 @@ public class TwirkToMinecraftChatListener implements TwirkListener {
         var hasPrefixes = false;
 
         if (modCfg.prefixes.global != null) {
-            content.append(Text.literal(modCfg.prefixes.global));
+            content.append(Text.of(modCfg.prefixes.global));
             hasPrefixes = true;
         }
 
         if (sender.isMod() && modCfg.prefixes.moderators != null) {
+            if (hasPrefixes) {
+                content.append(" ");
+            }
+           
             content.append(Text.literal(modCfg.prefixes.moderators).styled(s -> s.withColor(0x00ad03)));
             hasPrefixes = true;
         }
