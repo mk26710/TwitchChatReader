@@ -8,6 +8,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.NotNull;
 
+import static moe.polar.tcr.Utils.colorStringToText;
 import static moe.polar.tcr.Utils.getChat;
 
 public class TwirkToMinecraftChatListener implements TwirkListener {
@@ -25,7 +26,7 @@ public class TwirkToMinecraftChatListener implements TwirkListener {
         var hasPrefixes = false;
 
         if (modCfg.prefixes.global != null) {
-            content.append(Text.of(modCfg.prefixes.global));
+            content.append(colorStringToText(modCfg.prefixes.global));
             hasPrefixes = true;
         }
 
@@ -33,8 +34,8 @@ public class TwirkToMinecraftChatListener implements TwirkListener {
             if (hasPrefixes) {
                 content.append(" ");
             }
-           
-            content.append(Text.literal(modCfg.prefixes.moderators).styled(s -> s.withColor(0x00ad03)));
+
+            content.append(colorStringToText(modCfg.prefixes.moderators));
             hasPrefixes = true;
         }
 
@@ -43,7 +44,7 @@ public class TwirkToMinecraftChatListener implements TwirkListener {
                 content.append(" ");
             }
 
-            content.append(Text.literal(modCfg.prefixes.subscribers).styled(s -> s.withColor(0x8205b4)));
+            content.append(colorStringToText(modCfg.prefixes.subscribers));
             hasPrefixes = true;
         }
 
