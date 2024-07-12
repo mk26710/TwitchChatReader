@@ -23,9 +23,9 @@
 		"twitchchatreader.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.14.10",
-		"minecraft": "~1.20",
-		"java": ">=17",
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~1.21",
+		"java": ">=21",
 		"fabric-api": "*"
 	},
 	"suggests": {
