@@ -37,6 +37,11 @@ dependencies {
     include 'com.github.gikkman:Java-Twirk:0.7.1'
 
     compileOnly 'org.jetbrains:annotations:24.0.1'
+
+    implementation 'com.squareup.moshi:moshi:1.15.1'
+    include 'com.squareup.moshi:moshi:1.15.1'
+    implementation 'com.squareup.moshi:moshi-adapters:1.15.1'
+    include 'com.squareup.moshi:moshi-adapters:1.15.1'
 }
 
 processResources {
