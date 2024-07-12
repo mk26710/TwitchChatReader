@@ -16,6 +16,7 @@ import java.util.concurrent.Executors;
 
 import static com.mojang.brigadier.arguments.StringArgumentType.word;
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.argument;
+import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
 
 public class TwitchChatReader implements ClientModInitializer {
     public static final @NotNull Logger LOGGER = LoggerFactory.getLogger("twitchchatreader");
@@ -32,6 +33,9 @@ public class TwitchChatReader implements ClientModInitializer {
                         .literal("twitch")
                         .then(connect(handler))
                         .then(disconnect(handler))
+                        .then(literal("config")
+                                .then(configReload(handler))
+                        )
         ));
     }
 
@@ -46,5 +50,11 @@ public class TwitchChatReader implements ClientModInitializer {
         return ClientCommandManager
                 .literal("disconnect")
                 .executes(handler::disconnect);
+    }
+
+    private LiteralArgumentBuilder<FabricClientCommandSource> configReload(TwitchCommandHandler handler) {
+        return ClientCommandManager
+                .literal("reload")
+                .executes(handler::configReload);
     }
 }

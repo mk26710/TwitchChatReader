@@ -1,6 +1,7 @@
 package moe.polar.tcr;
 
 import com.mojang.brigadier.context.CommandContext;
+import moe.polar.tcr.config.TCRConfig;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -45,6 +46,13 @@ public class TwitchCommandHandler {
             twirk.disconnect();
             twirk = null;
         }
+
+        return 0;
+    }
+
+    public int configReload(final @NotNull CommandContext<FabricClientCommandSource> ctx) {
+        TCRConfig.getInstance().readFromDisk();
+        Utils.getChat().addMessage(Text.of("TCR config reloaded!"));
 
         return 0;
     }
