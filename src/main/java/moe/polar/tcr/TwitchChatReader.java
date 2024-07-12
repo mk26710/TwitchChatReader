@@ -18,7 +18,7 @@ import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.arg
 
 public class TwitchChatReader implements ClientModInitializer {
     public static final @NotNull Logger LOGGER = LoggerFactory.getLogger("twitchchatreader");
-    public static final @NotNull Executor TCR_EXECUTOR = Executors.newSingleThreadExecutor();
+    public static final @NotNull Executor TCR_EXECUTOR = Executors.newVirtualThreadPerTaskExecutor();
 
     @Override
     public void onInitializeClient() {
