@@ -3,6 +3,7 @@ package moe.polar.tcr;
 import com.gikk.twirk.events.TwirkListener;
 import com.gikk.twirk.types.twitchMessage.TwitchMessage;
 import com.gikk.twirk.types.users.TwitchUser;
+import moe.polar.tcr.config.TCRConfig;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.NotNull;
@@ -18,23 +19,31 @@ public class TwirkToMinecraftChatListener implements TwirkListener {
 
     @Override
     public void onPrivMsg(TwitchUser sender, TwitchMessage message) {
+        final var modCfg = TCRConfig.getInstance();
+
         final var content = Text.empty();
-        var hasBadges = false;
+        var hasPrefixes = false;
 
-        if (sender.isMod()) {
-            content.append(Text.literal("\uD83D\uDDE1").styled(s -> s.withColor(0x00ad03)));
-            hasBadges = true;
+        if (modCfg.prefixes.global != null) {
+            content.append(Text.literal(modCfg.prefixes.global));
+            hasPrefixes = true;
         }
 
-        if (sender.isSub()) {
-            if (hasBadges)
+        if (sender.isMod() && modCfg.prefixes.moderators != null) {
+            content.append(Text.literal(modCfg.prefixes.moderators).styled(s -> s.withColor(0x00ad03)));
+            hasPrefixes = true;
+        }
+
+        if (sender.isSub() && modCfg.prefixes.subscribers != null) {
+            if (hasPrefixes) {
                 content.append(" ");
+            }
 
-            content.append(Text.literal("⭐").styled(s -> s.withColor(0x8205b4)));
-            hasBadges = true;
+            content.append(Text.literal(modCfg.prefixes.subscribers).styled(s -> s.withColor(0x8205b4)));
+            hasPrefixes = true;
         }
 
-        if (hasBadges) {
+        if (hasPrefixes) {
             content.append(" ");
         }
 
