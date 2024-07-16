@@ -62,8 +62,8 @@ public class TwirkToMinecraftChatListener implements TwirkListener {
     @Override
     public void onConnect() {
         final var msg = Text
-                .translatable("commands.connect.success", twirk.channel)
-                .formatted(Formatting.DARK_GREEN);
+            .translatable("commands.connect.success", twirk.channel)
+            .formatted(Formatting.DARK_GREEN);
 
         getChat().addMessage(msg);
     }
@@ -71,8 +71,8 @@ public class TwirkToMinecraftChatListener implements TwirkListener {
     @Override
     public void onDisconnect() {
         final var msg = Text
-                .translatable("commands.disconnect.success", twirk.channel)
-                .formatted(Formatting.GRAY);
+            .translatable("commands.disconnect.success", twirk.channel)
+            .formatted(Formatting.GRAY);
 
         getChat().addMessage(msg);
     }
@@ -80,8 +80,8 @@ public class TwirkToMinecraftChatListener implements TwirkListener {
     @Override
     public void onReconnect() {
         final var msg = Text
-                .translatable("events.reconnect", twirk.channel)
-                .formatted(Formatting.GRAY);
+            .translatable("events.reconnect", twirk.channel)
+            .formatted(Formatting.GRAY);
 
         getChat().addMessage(msg);
     }
