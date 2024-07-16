@@ -15,6 +15,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import static com.mojang.brigadier.arguments.StringArgumentType.word;
+import static com.mojang.brigadier.arguments.StringArgumentType.string;
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.argument;
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
 
@@ -29,32 +30,46 @@ public class TwitchChatReader implements ClientModInitializer {
         final var handler = new TwitchCommandHandler();
 
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> dispatcher.register(
-                ClientCommandManager
-                        .literal("twitch")
-                        .then(connect(handler))
-                        .then(disconnect(handler))
-                        .then(literal("config")
-                                .then(configReload(handler))
+            ClientCommandManager
+                .literal("twitch")
+                .then(connect(handler))
+                .then(disconnect(handler))
+                .then(literal("config")
+                    .then(configReload(handler))
+                    .then(literal("prefix")
+                        .then(literal("global")
+                            .then(literal("set").then(argument("prefix", string()).executes(handler::configPrefixGlobalSet)))
+                            .then(literal("unset").executes(handler::configPrefixGlobalUnset))
                         )
+                        .then(literal("subscribers")
+                            .then(literal("set").then(argument("prefix", string()).executes(handler::configPrefixSubSet)))
+                            .then(literal("unset").executes(handler::configPrefixSubUnset))
+                        )
+                        .then(literal("moderators")
+                            .then(literal("set").then(argument("prefix", string()).executes(handler::configPrefixModSet)))
+                            .then(literal("unset").executes(handler::configPrefixModUnset))
+                        )
+                    )
+                )
         ));
     }
 
 
     private LiteralArgumentBuilder<FabricClientCommandSource> connect(TwitchCommandHandler handler) {
         return ClientCommandManager
-                .literal("connect")
-                .then(argument("channel", word()).executes(handler::connect));
+            .literal("connect")
+            .then(argument("channel", word()).executes(handler::connect));
     }
 
     private LiteralArgumentBuilder<FabricClientCommandSource> disconnect(TwitchCommandHandler handler) {
         return ClientCommandManager
-                .literal("disconnect")
-                .executes(handler::disconnect);
+            .literal("disconnect")
+            .executes(handler::disconnect);
     }
 
     private LiteralArgumentBuilder<FabricClientCommandSource> configReload(TwitchCommandHandler handler) {
         return ClientCommandManager
-                .literal("reload")
-                .executes(handler::configReload);
+            .literal("reload")
+            .executes(handler::configReload);
     }
 }
