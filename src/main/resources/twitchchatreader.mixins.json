@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "moe.polar.tcr.mixin",
+	"package": "dev.mk26710.tcr.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [],
 	"injectors": {

@@ -1,15 +1,12 @@
-package moe.polar.tcr;
+package dev.mk26710.tcr;
 
 import com.gikk.twirk.events.TwirkListener;
 import com.gikk.twirk.types.twitchMessage.TwitchMessage;
 import com.gikk.twirk.types.users.TwitchUser;
-import moe.polar.tcr.config.TCRConfig;
+import dev.mk26710.tcr.config.TCRConfig;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.NotNull;
-
-import static moe.polar.tcr.Utils.colorStringToText;
-import static moe.polar.tcr.Utils.getChat;
 
 public class TwirkToMinecraftChatListener implements TwirkListener {
     private final @NotNull BetterTwirk twirk;
@@ -26,7 +23,7 @@ public class TwirkToMinecraftChatListener implements TwirkListener {
         var hasPrefixes = false;
 
         if (modCfg.prefixes.global != null) {
-            content.append(colorStringToText(modCfg.prefixes.global));
+            content.append(Utils.colorStringToText(modCfg.prefixes.global));
             hasPrefixes = true;
         }
 
@@ -35,7 +32,7 @@ public class TwirkToMinecraftChatListener implements TwirkListener {
                 content.append(" ");
             }
 
-            content.append(colorStringToText(modCfg.prefixes.moderators));
+            content.append(Utils.colorStringToText(modCfg.prefixes.moderators));
             hasPrefixes = true;
         }
 
@@ -44,7 +41,7 @@ public class TwirkToMinecraftChatListener implements TwirkListener {
                 content.append(" ");
             }
 
-            content.append(colorStringToText(modCfg.prefixes.subscribers));
+            content.append(Utils.colorStringToText(modCfg.prefixes.subscribers));
             hasPrefixes = true;
         }
 
@@ -56,7 +53,7 @@ public class TwirkToMinecraftChatListener implements TwirkListener {
         content.append(": ");
         content.append(message.getContent());
 
-        getChat().addMessage(content);
+        Utils.getChat().addMessage(content);
     }
 
     @Override
@@ -65,7 +62,7 @@ public class TwirkToMinecraftChatListener implements TwirkListener {
             .translatable("commands.connect.success", twirk.channel)
             .formatted(Formatting.DARK_GREEN);
 
-        getChat().addMessage(msg);
+        Utils.getChat().addMessage(msg);
     }
 
     @Override
@@ -74,7 +71,7 @@ public class TwirkToMinecraftChatListener implements TwirkListener {
             .translatable("commands.disconnect.success", twirk.channel)
             .formatted(Formatting.GRAY);
 
-        getChat().addMessage(msg);
+        Utils.getChat().addMessage(msg);
     }
 
     @Override
@@ -83,6 +80,6 @@ public class TwirkToMinecraftChatListener implements TwirkListener {
             .translatable("events.reconnect", twirk.channel)
             .formatted(Formatting.GRAY);
 
-        getChat().addMessage(msg);
+        Utils.getChat().addMessage(msg);
     }
 }

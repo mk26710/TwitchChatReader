@@ -5,18 +5,18 @@
 	"name": "TwitchChatReader",
 	"description": "This mod allows you to connect to Twitch channels and read their chat in the game!\n\nYou should use /twitch command, it's pretty straightforward :)",
 	"authors": [
-		"httpolar"
+		"mk26710"
 	],
 	"contact": {
-		"homepage": "https://polar.moe/",
-		"sources": "https://github.com/httpolar/TwitchChatReader"
+		"homepage": "https://mk26710.dev/",
+		"sources": "https://github.com/mk26710/TwitchChatReader"
 	},
 	"license": "MIT",
 	"icon": "assets/twitchchatreader/icon.png",
 	"environment": "client",
 	"entrypoints": {
 		"client": [
-			"moe.polar.tcr.TwitchChatReader"
+			"dev.mk26710.tcr.TwitchChatReader"
 		]
 	},
 	"mixins": [

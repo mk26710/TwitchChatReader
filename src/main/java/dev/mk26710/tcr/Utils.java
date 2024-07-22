@@ -1,4 +1,4 @@
-package moe.polar.tcr;
+package dev.mk26710.tcr;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.ChatHud;

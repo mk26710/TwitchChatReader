@@ -1,4 +1,4 @@
-package moe.polar.tcr.config;
+package dev.mk26710.tcr.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

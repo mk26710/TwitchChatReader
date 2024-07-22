@@ -1,7 +1,7 @@
-package moe.polar.tcr;
+package dev.mk26710.tcr;
 
 import com.mojang.brigadier.context.CommandContext;
-import moe.polar.tcr.config.TCRConfig;
+import dev.mk26710.tcr.config.TCRConfig;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;

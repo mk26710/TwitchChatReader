@@ -1,4 +1,4 @@
-package moe.polar.tcr;
+package dev.mk26710.tcr;
 
 import com.gikk.twirk.Twirk;
 import com.gikk.twirk.TwirkBuilder;
@@ -7,9 +7,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
-
-import static moe.polar.tcr.Utils.randomNumIn;
-import static moe.polar.tcr.TwitchChatReader.TCR_EXECUTOR;
 
 public class BetterTwirk {
     private final @NotNull Twirk underlyingTwirk;
@@ -25,7 +22,7 @@ public class BetterTwirk {
     }
 
     private String getAnonymousTwitchUsername() {
-        final Integer num = randomNumIn(1000, 9999);
+        final Integer num = Utils.randomNumIn(1000, 9999);
         return "justinfan" + num;
     }
 
@@ -48,7 +45,7 @@ public class BetterTwirk {
             } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
-        }, TCR_EXECUTOR);
+        }, TwitchChatReader.TCR_EXECUTOR);
     }
 
     public void disconnect() {
