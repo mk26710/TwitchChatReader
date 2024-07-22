@@ -2,6 +2,7 @@ package dev.mk26710.tcr;
 
 import com.mojang.brigadier.context.CommandContext;
 import dev.mk26710.tcr.config.TCRConfig;
+import dev.mk26710.tcr.enums.PrefixType;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -54,6 +55,58 @@ public class TwitchCommandHandler {
     public int configReload(final @NotNull CommandContext<FabricClientCommandSource> ctx) {
         TCRConfig.getInstance().readFromDisk();
         ctx.getSource().sendFeedback(Text.literal("TwitchChatReader config reloaded!").styled((s) -> s.withColor(Formatting.GREEN)));
+
+        return 0;
+    }
+
+    private MutableText getPrefixFeedback(final @NotNull PrefixType type) {
+        String prefix = null;
+        String message = "Current ";
+
+        switch (type) {
+            case GLOBAL -> {
+                prefix = TCRConfig.getInstance().prefixes.global;
+                message += "global";
+            }
+            case SUBSCRIBERS -> {
+                prefix = TCRConfig.getInstance().prefixes.subscribers;
+                message += "subscribers";
+            }
+            case MODERATORS -> {
+                prefix = TCRConfig.getInstance().prefixes.moderators;
+                message += "moderators";
+            }
+        }
+
+        message += " prefix is ";
+
+        final MutableText response = Text.literal(message).styled((s) -> s.withColor(Formatting.GRAY));
+        if (prefix == null) {
+            response.append(Text.literal("not set.").styled((s) -> s.withColor(Formatting.RED)));
+        } else {
+            response.append(Utils.colorStringToText(prefix));
+        }
+
+        return response;
+    }
+
+    public int configPrefixGlobalGet(final @NotNull CommandContext<FabricClientCommandSource> ctx) {
+        final var response = getPrefixFeedback(PrefixType.GLOBAL);
+        ctx.getSource().sendFeedback(response);
+
+        return 0;
+    }
+
+    public int configPrefixSubscribersGet(final @NotNull CommandContext<FabricClientCommandSource> ctx) {
+        final var response = getPrefixFeedback(PrefixType.SUBSCRIBERS);
+        ctx.getSource().sendFeedback(response);
+
+        return 0;
+    }
+
+    public int configPrefixModeratorsGet(final @NotNull CommandContext<FabricClientCommandSource> ctx) {
+        final var response = getPrefixFeedback(PrefixType.MODERATORS);
+        ctx.getSource().sendFeedback(response);
 
         return 0;
     }
