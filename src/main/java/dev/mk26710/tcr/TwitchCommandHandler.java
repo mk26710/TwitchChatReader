@@ -10,7 +10,6 @@ import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-
 public class TwitchCommandHandler {
     private @Nullable BetterTwirk twirk = null;
 
@@ -33,12 +32,12 @@ public class TwitchCommandHandler {
         ctx.getSource().sendFeedback(msg);
 
         twirk.connect().exceptionally((e) -> {
-            final var errorMessage = Text.translatable("commands.connect.error", e.getMessage()).formatted(Formatting.RED);
+            final var errorMessage = Text.translatable("commands.connect.error", e.getMessage())
+                    .formatted(Formatting.RED);
             ctx.getSource().sendError(errorMessage);
 
             return false;
         });
-
 
         return 0;
     }
@@ -54,7 +53,8 @@ public class TwitchCommandHandler {
 
     public int configReload(final @NotNull CommandContext<FabricClientCommandSource> ctx) {
         TCRConfig.getInstance().readFromDisk();
-        ctx.getSource().sendFeedback(Text.literal("TwitchChatReader config reloaded!").styled((s) -> s.withColor(Formatting.GREEN)));
+        ctx.getSource().sendFeedback(
+                Text.literal("TwitchChatReader config reloaded!").styled((s) -> s.withColor(Formatting.GREEN)));
 
         return 0;
     }
@@ -84,7 +84,7 @@ public class TwitchCommandHandler {
         if (prefix == null) {
             response.append(Text.literal("not set.").styled((s) -> s.withColor(Formatting.RED)));
         } else {
-            response.append(Utils.colorStringToText(prefix));
+            response.append(Utils.coloredTextFromString(prefix));
         }
 
         return response;
@@ -114,7 +114,8 @@ public class TwitchCommandHandler {
     public int configPrefixGlobalSet(final @NotNull CommandContext<FabricClientCommandSource> ctx) {
         final var newPrefix = ctx.getArgument("prefix", String.class);
         if (newPrefix.isEmpty() || newPrefix.isBlank()) {
-            ctx.getSource().sendError(Text.literal("Prefixes must have at least one character!").styled((s) -> s.withColor(Formatting.RED)));
+            ctx.getSource().sendError(Text.literal("Prefixes must have at least one character!")
+                    .styled((s) -> s.withColor(Formatting.RED)));
             return 1;
         }
 
@@ -123,7 +124,7 @@ public class TwitchCommandHandler {
 
         MutableText response = Text.empty();
         response.append(Text.literal("New global prefix was set to ").styled((s) -> s.withColor(Formatting.GRAY)));
-        response.append(Utils.colorStringToText(TCRConfig.getInstance().prefixes.global));
+        response.append(Utils.coloredTextFromString(TCRConfig.getInstance().prefixes.global));
 
         ctx.getSource().sendFeedback(response);
 
@@ -143,7 +144,8 @@ public class TwitchCommandHandler {
     public int configPrefixSubSet(final @NotNull CommandContext<FabricClientCommandSource> ctx) {
         final String newPrefix = ctx.getArgument("prefix", String.class);
         if (newPrefix.isBlank() || newPrefix.isEmpty()) {
-            final MutableText msg = Text.literal("New prefix cannot be empty!").styled((s) -> s.withColor(Formatting.RED));
+            final MutableText msg = Text.literal("New prefix cannot be empty!")
+                    .styled((s) -> s.withColor(Formatting.RED));
             ctx.getSource().sendError(msg);
 
             return 1;
@@ -154,7 +156,7 @@ public class TwitchCommandHandler {
 
         final MutableText msg = Text.empty();
         msg.append(Text.literal("New subscribers prefix was set to ").styled((s) -> s.withColor(Formatting.GRAY)));
-        msg.append(Utils.colorStringToText(newPrefix));
+        msg.append(Utils.coloredTextFromString(newPrefix));
 
         ctx.getSource().sendFeedback(msg);
 
@@ -174,7 +176,8 @@ public class TwitchCommandHandler {
     public int configPrefixModSet(final @NotNull CommandContext<FabricClientCommandSource> ctx) {
         final String newPrefix = ctx.getArgument("prefix", String.class);
         if (newPrefix.isBlank() || newPrefix.isEmpty()) {
-            final MutableText msg = Text.literal("New prefix cannot be empty!").styled((s) -> s.withColor(Formatting.RED));
+            final MutableText msg = Text.literal("New prefix cannot be empty!")
+                    .styled((s) -> s.withColor(Formatting.RED));
             ctx.getSource().sendError(msg);
 
             return 1;
@@ -185,7 +188,7 @@ public class TwitchCommandHandler {
 
         final MutableText msg = Text.empty();
         msg.append(Text.literal("New moderators prefix was set to ").styled((s) -> s.withColor(Formatting.GRAY)));
-        msg.append(Utils.colorStringToText(newPrefix));
+        msg.append(Utils.coloredTextFromString(newPrefix));
 
         ctx.getSource().sendFeedback(msg);
 

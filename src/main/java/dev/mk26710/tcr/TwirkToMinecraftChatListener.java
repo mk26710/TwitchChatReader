@@ -23,7 +23,7 @@ public class TwirkToMinecraftChatListener implements TwirkListener {
         var hasPrefixes = false;
 
         if (modCfg.prefixes.global != null) {
-            content.append(Utils.colorStringToText(modCfg.prefixes.global));
+            content.append(Utils.coloredTextFromString(modCfg.prefixes.global));
             hasPrefixes = true;
         }
 
@@ -32,7 +32,7 @@ public class TwirkToMinecraftChatListener implements TwirkListener {
                 content.append(" ");
             }
 
-            content.append(Utils.colorStringToText(modCfg.prefixes.moderators));
+            content.append(Utils.coloredTextFromString(modCfg.prefixes.moderators));
             hasPrefixes = true;
         }
 
@@ -41,7 +41,7 @@ public class TwirkToMinecraftChatListener implements TwirkListener {
                 content.append(" ");
             }
 
-            content.append(Utils.colorStringToText(modCfg.prefixes.subscribers));
+            content.append(Utils.coloredTextFromString(modCfg.prefixes.subscribers));
             hasPrefixes = true;
         }
 
@@ -59,8 +59,8 @@ public class TwirkToMinecraftChatListener implements TwirkListener {
     @Override
     public void onConnect() {
         final var msg = Text
-            .translatable("commands.connect.success", twirk.channel)
-            .formatted(Formatting.DARK_GREEN);
+                .translatable("commands.connect.success", twirk.channel)
+                .formatted(Formatting.DARK_GREEN);
 
         Utils.getChat().addMessage(msg);
     }
@@ -68,8 +68,8 @@ public class TwirkToMinecraftChatListener implements TwirkListener {
     @Override
     public void onDisconnect() {
         final var msg = Text
-            .translatable("commands.disconnect.success", twirk.channel)
-            .formatted(Formatting.GRAY);
+                .translatable("commands.disconnect.success", twirk.channel)
+                .formatted(Formatting.GRAY);
 
         Utils.getChat().addMessage(msg);
     }
@@ -77,8 +77,8 @@ public class TwirkToMinecraftChatListener implements TwirkListener {
     @Override
     public void onReconnect() {
         final var msg = Text
-            .translatable("events.reconnect", twirk.channel)
-            .formatted(Formatting.GRAY);
+                .translatable("events.reconnect", twirk.channel)
+                .formatted(Formatting.GRAY);
 
         Utils.getChat().addMessage(msg);
     }
