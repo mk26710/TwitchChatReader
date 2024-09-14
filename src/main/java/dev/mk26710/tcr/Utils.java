@@ -22,11 +22,6 @@ public class Utils {
         return rand.nextInt((max - min) + 1) + min;
     }
 
-    @Deprecated
-    public static Text colorStringToText(String s) {
-        return Text.of(s.replaceAll("&", "§"));
-    }
-
     public static String colorRegex = "(&#[a-fA-F0-9]{6}|&[0-9abcdefgulomkr])";
     public static Pattern colorPattern = Pattern.compile(colorRegex, Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 
