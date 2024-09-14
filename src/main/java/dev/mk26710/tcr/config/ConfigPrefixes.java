@@ -25,7 +25,7 @@ public class ConfigPrefixes {
     public String vips;
 
     public ConfigPrefixes() {
-        global = null;
+        global = "&#9146FF[Twitch]";
         followers = null;
         subscribers = "&5[SUB]";
         moderators = "&2[MOD]";
